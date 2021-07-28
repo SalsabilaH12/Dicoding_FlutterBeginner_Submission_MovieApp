@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_movies/home_screen.dart';
-import 'package:my_movies/detail_film.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,8 +14,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Montserrat',
       ),
-      home: DetailFilm(),
-      // home: HomeScreen(),
+      // home: DetailFilm(),
+      home: HomeScreen(),
     );
   }
 }
