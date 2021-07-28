@@ -1,4 +1,4 @@
-# MOoOvie App
+# my_movies
 
 A Simple Movie App 
 

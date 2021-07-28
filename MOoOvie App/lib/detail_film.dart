@@ -2,20 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:my_movies/model/film.dart';
 
 class DetailFilm extends StatelessWidget{
+  final Film film;
+
+  DetailFilm({required this.film});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Detail Film'),
-      //   backgroundColor: Colors.white12,
-      // ),
       backgroundColor: Colors.white12,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Image.asset('images/avengers_landscape.png'),
+              Stack(
+                children: <Widget>[
+                  Image.asset(film.posterLandscape),
+                  SafeArea(
+                    child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.black26,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               Container(
                 margin: EdgeInsets.only(left: 16.0, top: 16.0,bottom: 4.0, right: 32.0,),
                 child: Row(
@@ -24,7 +45,7 @@ class DetailFilm extends StatelessWidget{
                     Padding(
                       padding: EdgeInsets.all(4.0),
                       child: Text(
-                        'Avengers: End Game',
+                        film.title,
                         style: TextStyle(
                           fontSize: 24.0,
                           fontWeight: FontWeight.bold,
@@ -34,16 +55,8 @@ class DetailFilm extends StatelessWidget{
                     ),
                     Padding(
                       padding: EdgeInsets.all(4.0),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.favorite_border,
-                          color: Colors.white,
-                          size: 40.0,
-                        ),
-                        onPressed: (){},
-                      ),
+                      child:  FavoriteButton(),
                     ),
-
                   ],
                 ),
               ),
@@ -62,7 +75,7 @@ class DetailFilm extends StatelessWidget{
                     Container(
                       margin: EdgeInsets.only(left: 4.0, right: 32.0),
                       child:  Text(
-                        '8.4',
+                        film.rating,
                         style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
@@ -81,7 +94,7 @@ class DetailFilm extends StatelessWidget{
                     Container(
                       margin: EdgeInsets.only(left: 4.0, right: 16.0),
                       child:  Text(
-                        '3h 1min',
+                        film.duration,
                         style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
@@ -106,8 +119,8 @@ class DetailFilm extends StatelessWidget{
               Container(
                 margin: EdgeInsets.only(left: 16.0,top:8.0),
                 child: Row(
-                  children: <Widget>[
-                    Container(
+                  children: film.genre.map((list){
+                    return Container(
                       margin: EdgeInsets.only(right: 4.0),
                       padding: EdgeInsets.all(12.0),
                       decoration: BoxDecoration(
@@ -117,57 +130,21 @@ class DetailFilm extends StatelessWidget{
                           borderRadius: BorderRadius.all(Radius.circular(30))
                       ),
                       child: Text(
-                        'Action',
+                        list,
                         style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left:4.0, right: 4.0),
-                      padding: EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.white70,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(30))
-                      ),
-                      child: Text(
-                        'Adventure',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left:4.0, right: 4.0),
-                      padding: EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.white70,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(30))
-                      ),
-                      child: Text(
-                        'Drama',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
+                    );
+                  }).toList(),
                 ),
               ),
               Container(
                 margin: EdgeInsets.only(top: 32.0, bottom: 4.0, left: 16.0),
                 child:  Text(
-                  'Synopsis',
+                  'Storyline',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
@@ -178,7 +155,7 @@ class DetailFilm extends StatelessWidget{
               Container(
                 margin: EdgeInsets.all(16.0),
                 child:  Text(
-                  'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos actions and restore balance to the universe.',
+                  film.storyline,
                   style: TextStyle(
                     fontSize: 16.0,
                     color: Colors.white,
@@ -189,6 +166,31 @@ class DetailFilm extends StatelessWidget{
           ),
         ),
       ),
+    );
+  }
+}
+
+class FavoriteButton extends StatefulWidget{
+  @override
+  _FavoriteButtonState createState() => _FavoriteButtonState();
+}
+
+class _FavoriteButtonState extends State<FavoriteButton> {
+  bool isFavorite = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        isFavorite ? Icons.favorite : Icons.favorite_border,
+        color: Colors.red,
+        size: 40.0,
+      ),
+      onPressed: () {
+        setState(() {
+          isFavorite = !isFavorite;
+        });
+      },
     );
   }
 }
