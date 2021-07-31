@@ -1,4 +1,4 @@
-# Dicoding_FlutterBeginner_Submission_MovieApp
+# Dicoding FlutterBeginner Submission - MovieApp
 
 Submission for Dicoding's course "Belajar Membuat Aplikasi Flutter untuk Pemula"
 
