@@ -2,6 +2,8 @@
 
 Submission for Dicoding's course "Belajar Membuat Aplikasi Flutter untuk Pemula"
 
+Review Rating :  <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="20" height="20"> <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="20" height="20"> <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="20" height="20"> <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="20" height="20">
+
 ### Screenshots
 | Home Page      | DetailFilm Page      |
 |------------|-------------|
